@@ -1,0 +1,151 @@
+[
+  {
+    "id": 1,
+    "name": "Ayesha Khan",
+    "slug": "ayesha-khan",
+    "photo": "images/artist_1_ayesha.png",
+    "genres": ["Ghazal"],
+    "city": "Mumbai",
+    "bio": "Soulful ghazal singer blending tradition with modern rhythm. Ayesha has performed at over 50 venues across India, weaving classical Urdu poetry with contemporary arrangements. Her voice carries the weight of tradition while pushing boundaries into fusion territory.",
+    "skills": ["Vocalist", "Lyricist", "Composer"],
+    "sample_tracks": [
+      {"title": "Dil Ki Baat", "url": "#"},
+      {"title": "Raat Ka Safar", "url": "#"},
+      {"title": "Ishq Mein", "url": "#"}
+    ],
+    "socials": {
+      "instagram": "#",
+      "youtube": "#",
+      "spotify": "#"
+    },
+    "availability": true,
+    "tags": ["Classical", "Fusion", "Urdu Poetry", "Live Performer"],
+    "featured": true,
+    "collab_interests": "Looking for producers who can blend electronic beats with classical ragas. Open to cross-genre experiments with hip-hop artists.",
+    "upcoming_events": [1, 5]
+  },
+  {
+    "id": 2,
+    "name": "Riaz Ansari",
+    "slug": "riaz-ansari",
+    "photo": "images/artist_2_riaz.png",
+    "genres": ["Hip-Hop"],
+    "city": "Delhi",
+    "bio": "Spoken word & conscious rap. Riaz brings raw stories from Delhi's streets to the stage, blending Hindi and English with hard-hitting social commentary. A regular at underground cyphers and poetry slams.",
+    "skills": ["Lyricist", "Vocalist", "Songwriter"],
+    "sample_tracks": [
+      {"title": "Sadak Ki Awaaz", "url": "#"},
+      {"title": "Midnight Bars", "url": "#"},
+      {"title": "Waqt", "url": "#"}
+    ],
+    "socials": {
+      "instagram": "#",
+      "youtube": "#",
+      "soundcloud": "#"
+    },
+    "availability": true,
+    "tags": ["Conscious Rap", "Spoken Word", "Hindi Hip-Hop", "Lyricist"],
+    "featured": true,
+    "collab_interests": "Seeking producers for an upcoming EP. Interested in collaborating with ghazal artists for a fusion project.",
+    "upcoming_events": [2, 4]
+  },
+  {
+    "id": 3,
+    "name": "Naina Verma",
+    "slug": "naina-verma",
+    "photo": "images/artist_3_naina.png",
+    "genres": ["Singer-Songwriter"],
+    "city": "Bengaluru",
+    "bio": "Acoustic singer-songwriter with melodic hooks that stay with you. Naina's indie folk sound blends English and Kannada lyrics over fingerpicked guitar, creating intimate soundscapes inspired by everyday life.",
+    "skills": ["Vocalist", "Guitarist", "Songwriter", "Composer"],
+    "sample_tracks": [
+      {"title": "Morning Light", "url": "#"},
+      {"title": "Paper Boats", "url": "#"},
+      {"title": "Munjaane", "url": "#"}
+    ],
+    "socials": {
+      "instagram": "#",
+      "spotify": "#",
+      "bandcamp": "#"
+    },
+    "availability": true,
+    "tags": ["Indie Folk", "Acoustic", "Bilingual", "Guitarist"],
+    "featured": false,
+    "collab_interests": "Open to duets and co-writing sessions. Looking for a tabla player or percussionist to add depth to live sets.",
+    "upcoming_events": [3]
+  },
+  {
+    "id": 4,
+    "name": "Karan \"K-Beat\" Singh",
+    "slug": "karan-k-beat-singh",
+    "photo": "images/artist_4_karan.png",
+    "genres": ["Hip-Hop", "Singer-Songwriter"],
+    "city": "Delhi",
+    "bio": "Trap/R&B producer open for collabs. K-Beat has produced tracks for several underground hip-hop artists across India. His beats blend 808s with Indian classical samples, creating a unique sonic identity.",
+    "skills": ["Producer", "Beat Maker", "Mixing Engineer"],
+    "sample_tracks": [
+      {"title": "808 Raaga", "url": "#"},
+      {"title": "Night Drive", "url": "#"},
+      {"title": "Bounce Back", "url": "#"}
+    ],
+    "socials": {
+      "instagram": "#",
+      "youtube": "#",
+      "soundcloud": "#"
+    },
+    "availability": true,
+    "tags": ["Trap", "R&B", "Indian Samples", "Beat Producer"],
+    "featured": true,
+    "collab_interests": "Always looking for vocalists — rappers and singers alike. Send me your demos!",
+    "upcoming_events": [2]
+  },
+  {
+    "id": 5,
+    "name": "Farah Qureshi",
+    "slug": "farah-qureshi",
+    "photo": "images/artist_5_farah.png",
+    "genres": ["Ghazal"],
+    "city": "Lucknow",
+    "bio": "Classical ghazal performer with contemporary arrangements. Farah trained under Ustad Nusrat Ali for 8 years and now brings a fresh perspective to traditional ghazals, incorporating subtle electronic and world music elements.",
+    "skills": ["Vocalist", "Harmonium Player", "Music Director"],
+    "sample_tracks": [
+      {"title": "Mehfil-e-Ishq", "url": "#"},
+      {"title": "Shaam-e-Ghazal", "url": "#"},
+      {"title": "Tere Baghair", "url": "#"}
+    ],
+    "socials": {
+      "instagram": "#",
+      "youtube": "#"
+    },
+    "availability": false,
+    "tags": ["Classical", "Harmonium", "Lucknowi Tradition", "World Music"],
+    "featured": false,
+    "collab_interests": "Interested in recording collaborations with string quartets and electronic producers. Currently working on an album.",
+    "upcoming_events": [1, 5]
+  },
+  {
+    "id": 6,
+    "name": "Sameer Rao",
+    "slug": "sameer-rao",
+    "photo": "images/artist_6_sameer.png",
+    "genres": ["Hip-Hop"],
+    "city": "Pune",
+    "bio": "Underground emcee and freestyle cypher regular. Sameer is known for his rapid-fire delivery and witty wordplay. A mainstay of Pune's hip-hop scene, he organizes monthly cypher events and mentors upcoming rappers.",
+    "skills": ["Vocalist", "Lyricist", "Event Organizer"],
+    "sample_tracks": [
+      {"title": "Cypher King", "url": "#"},
+      {"title": "Pune Se", "url": "#"},
+      {"title": "Freestyle Friday", "url": "#"}
+    ],
+    "socials": {
+      "instagram": "#",
+      "youtube": "#",
+      "twitter": "#"
+    },
+    "availability": true,
+    "tags": ["Freestyle", "Battle Rap", "Underground", "Organizer"],
+    "featured": false,
+    "collab_interests": "Down for any cypher or freestyle session. Looking for producers who understand boom-bap aesthetics.",
+    "upcoming_events": [4]
+  }
+]

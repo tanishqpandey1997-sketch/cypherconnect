@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- SEO Meta -->
+  <title>CypherConnect — Find Your Next Beat | Underground Music Community</title>
+  <meta name="description" content="CypherConnect connects Hip-Hop, Ghazal, and Singer-Songwriter artists for discovery, collaboration, and open-mic events across India.">
+  <meta name="keywords" content="underground music, hip-hop, ghazal, singer-songwriter, open mic, collaboration, India, artists">
+  <meta name="author" content="CypherConnect">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="CypherConnect — Find Your Next Beat">
+  <meta property="og:description" content="Connecting Hip-Hop, Ghazal & Vocal Talents — discover artists, join open mics, and find your perfect collaborator.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="images/hero_stage.png">
+  <meta property="og:url" content="https://cypherconnect.in">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CypherConnect — Find Your Next Beat">
+  <meta name="twitter:description" content="Connecting underground artists across India.">
+  <meta name="twitter:image" content="images/hero_stage.png">
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'><defs><linearGradient id='fg' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%23FF6B3D'/><stop offset='100%25' stop-color='%23E55A2F'/></linearGradient></defs><circle cx='24' cy='24' r='22' fill='url(%23fg)' opacity='0.15'/><circle cx='24' cy='24' r='22' stroke='url(%23fg)' stroke-width='2' fill='none'/><rect x='21' y='10' width='6' height='18' rx='3' fill='url(%23fg)'/><path d='M17 24C17 28.5 20 32 24 32C28 32 31 28.5 31 24' stroke='url(%23fg)' stroke-width='2.5' fill='none' stroke-linecap='round'/><line x1='24' y1='32' x2='24' y2='38' stroke='url(%23fg)' stroke-width='2.5' stroke-linecap='round'/><line x1='20' y1='38' x2='28' y2='38' stroke='url(%23fg)' stroke-width='2.5' stroke-linecap='round'/></svg>">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/design-system.css">
+  <link rel="stylesheet" href="css/components.css">
+
+  <style>
+    /* App transition */
+    #app {
+      transition: opacity 0.15s ease;
+    }
+  </style>
+</head>
+<body>
+  <div id="app" role="main">
+    <!-- Loading state -->
+    <div style="display:flex;align-items:center;justify-content:center;min-height:100vh;">
+      <div style="text-align:center;" id="loading-screen">
+        <div style="margin-bottom:1rem;animation: float 2s ease-in-out infinite;" id="loading-logo"></div>
+        <h2 style="font-family:'Space Grotesk',sans-serif;margin-bottom:0.5rem;color:#1F1F1F;">CypherConnect</h2>
+        <p style="color:#9A9A9A;">Loading the beat...</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts (order matters) -->
+  <script src="js/icons.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/router.js"></script>
+  <script src="js/matchmaker.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/pages/home.js"></script>
+  <script src="js/pages/artists.js"></script>
+  <script src="js/pages/artist-profile.js"></script>
+  <script src="js/pages/events.js"></script>
+  <script src="js/pages/community.js"></script>
+  <script src="js/pages/about.js"></script>
+  <script src="js/pages/account.js"></script>
+  <script src="js/cypherbot.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
