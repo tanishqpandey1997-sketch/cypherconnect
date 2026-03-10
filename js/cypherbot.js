@@ -292,26 +292,45 @@ Always base your answers on the actual data above. If asked about artists or eve
     return 'unknown';
   },
 
+  // ── Inline icon helper (renders SVG in text) ──
+  _i(name, size = 14) {
+    const map = {
+      mic: Icons.mic, music: Icons.musicNote, cal: Icons.calendar,
+      handshake: Icons.handshake, user: Icons.user, info: Icons.info,
+      pin: Icons.mapPin, sparkles: Icons.sparkles, star: Icons.star,
+      users: Icons.users, mail: Icons.mail, search: Icons.search,
+      chat: Icons.messageCircle, settings: Icons.settings, list: Icons.list,
+      tag: Icons.tag, zap: Icons.zap, lock: Icons.lock, close: Icons.close,
+      check: Icons.checkCircle, alert: Icons.alertCircle, play: Icons.play,
+      headphones: Icons.headphones, heart: Icons.heart, rocket: Icons.rocket,
+    };
+    const fn = map[name];
+    return fn ? fn('cb-icon', size) : '';
+  },
+
   // ── Local response handlers ───────────────────
   handleGreeting() {
+    const mic = this._i('mic');
+    const zap = this._i('zap');
+    const music = this._i('music');
     const greetings = [
-      "Hey! 🎤 I'm **CypherBot**, your AI matchmaker for the underground music scene. Ask me anything about artists, events, or collaborations!",
-      "Yo! 🔥 Welcome to CypherConnect. I can help you find artists, discover events, or suggest perfect collabs. What are you looking for?",
-      "Namaste! 🎵 I'm CypherBot — think of me as your personal music scene navigator. What can I help you with today?",
+      `Hey! ${mic} I'm **CypherBot**, your AI matchmaker for the underground music scene. Ask me anything about artists, events, or collaborations!`,
+      `Yo! ${zap} Welcome to CypherConnect. I can help you find artists, discover events, or suggest perfect collabs. What are you looking for?`,
+      `Namaste! ${music} I'm CypherBot — think of me as your personal music scene navigator. What can I help you with today?`,
     ];
     return { text: greetings[Math.floor(Math.random() * greetings.length)], suggestions: ['Find artists', 'Upcoming events', 'Suggest a collab', 'About CypherConnect'] };
   },
 
   handleHelp() {
     return {
-      text: `Here's what I can do for you 🎯\n\n🎤 **Find Artists** — "Show me rappers in Delhi"\n📅 **Find Events** — "What events are happening in Mumbai?"\n🤝 **Suggest Collabs** — "Who should Ayesha collaborate with?"\n👤 **Artist Info** — "Tell me about Riaz Ansari"\nℹ️ **About** — "What is CypherConnect?"\n\nJust type naturally — I'll figure out what you need!`,
+      text: `Here's what I can do for you ${this._i('sparkles')}\n\n${this._i('mic')} **Find Artists** — "Show me rappers in Delhi"\n${this._i('cal')} **Find Events** — "What events are happening in Mumbai?"\n${this._i('handshake')} **Suggest Collabs** — "Who should Ayesha collaborate with?"\n${this._i('user')} **Artist Info** — "Tell me about Riaz Ansari"\n${this._i('info')} **About** — "What is CypherConnect?"\n\nJust type naturally — I'll figure out what you need!`,
       suggestions: ['Find rappers', 'Events in Delhi', 'Suggest a collab', 'About CypherConnect']
     };
   },
 
   handleAbout() {
     return {
-      text: `**CypherConnect** is India's underground music community platform 🇮🇳\n\nWe connect **Hip-Hop**, **Ghazal**, and **Singer-Songwriter** artists for:\n• 🔍 **Discovery** — Find talented artists across India\n• 🤝 **Collaboration** — Get matched with complementary artists\n• 🎤 **Events** — Discover open mics, cyphers, and jam sessions\n• 💬 **Community** — Share your work and connect with peers\n\nCurrently featuring **${AppData.artists.length} artists** and **${AppData.events.length} upcoming events**!`,
+      text: `**CypherConnect** is India's underground music community platform ${this._i('music')}\n\nWe connect **Hip-Hop**, **Ghazal**, and **Singer-Songwriter** artists for:\n• ${this._i('search')} **Discovery** — Find talented artists across India\n• ${this._i('handshake')} **Collaboration** — Get matched with complementary artists\n• ${this._i('mic')} **Events** — Discover open mics, cyphers, and jam sessions\n• ${this._i('chat')} **Community** — Share your work and connect with peers\n\nCurrently featuring **${AppData.artists.length} artists** and **${AppData.events.length} upcoming events**!`,
       suggestions: ['Browse artists', 'View events', 'Find a collab match']
     };
   },
@@ -335,10 +354,10 @@ Always base your answers on the actual data above. If asked about artists or eve
     if (results.length === 0) {
       return { text: `I couldn't find any artists matching ${filterDesc.join(' ')} 😕\n\nTry broadening your search!`, suggestions: ['Show all artists', 'Hip-Hop artists', 'Ghazal singers', 'Events near me'] };
     }
-    const header = filterDesc.length > 0 ? `Found **${results.length} artist${results.length > 1 ? 's' : ''}** ${filterDesc.join(' ')} 🎶\n\n` : `Here are all **${results.length} artists** on CypherConnect 🎶\n\n`;
+    const header = filterDesc.length > 0 ? `Found **${results.length} artist${results.length > 1 ? 's' : ''}** ${filterDesc.join(' ')} ${this._i('music')}\n\n` : `Here are all **${results.length} artists** on CypherConnect ${this._i('music')}\n\n`;
     const cards = results.map(a => {
-      const status = a.availability ? '🟢 Open for collab' : '🔴 Currently busy';
-      return `**${a.name}** — ${a.genres.join(', ')}\n📍 ${a.city} · ${status}\n_${a.bio.substring(0, 100)}..._\n[→ View Profile](#/artist/${a.slug})`;
+      const status = a.availability ? '<span class="cb-dot cb-dot-green"></span> Open for collab' : '<span class="cb-dot cb-dot-red"></span> Currently busy';
+      return `**${a.name}** — ${a.genres.join(', ')}\n${this._i('pin')} ${a.city} · ${status}\n_${a.bio.substring(0, 100)}..._\n[→ View Profile](#/artist/${a.slug})`;
     }).join('\n\n---\n\n');
     return { text: header + cards, suggestions: this._buildArtistSuggestions(results) };
   },
@@ -358,9 +377,9 @@ Always base your answers on the actual data above. If asked about artists or eve
     if (results.length === 0) {
       return { text: `No events found ${filterDesc.length > 0 ? 'for ' + filterDesc.join(' ') : ''} 😕\n\nCheck back soon!`, suggestions: ['All events', 'Hip-Hop events', 'Ghazal events', 'Find artists'] };
     }
-    const header = filterDesc.length > 0 ? `Found **${results.length} event${results.length > 1 ? 's' : ''}** ${filterDesc.join(' ')} 📅\n\n` : `Here are all **${results.length} upcoming events** 📅\n\n`;
+    const header = filterDesc.length > 0 ? `Found **${results.length} event${results.length > 1 ? 's' : ''}** ${filterDesc.join(' ')} ${this._i('cal')}\n\n` : `Here are all **${results.length} upcoming events** ${this._i('cal')}\n\n`;
     const cards = results.map(e => {
-      return `🎤 **${e.title}**\n📍 ${e.venue_name}, ${e.city}\n🗓️ ${Utils.formatDate(e.date_time)} at ${Utils.formatTime(e.date_time)}\n👥 ${e.rsvp_count} RSVPs · ${e.performer_slots} slots\n_${e.description.substring(0, 100)}..._`;
+      return `${this._i('mic')} **${e.title}**\n${this._i('pin')} ${e.venue_name}, ${e.city}\n${this._i('cal')} ${Utils.formatDate(e.date_time)} at ${Utils.formatTime(e.date_time)}\n${this._i('users')} ${e.rsvp_count} RSVPs · ${e.performer_slots} slots\n_${e.description.substring(0, 100)}..._`;
     }).join('\n\n---\n\n');
     return { text: header + cards, suggestions: ['Find artists for this event', 'View all events', 'Browse artists'] };
   },
@@ -371,16 +390,16 @@ Always base your answers on the actual data above. If asked about artists or eve
       const artist = AppData.artists.find(a => a.name === entities.artistNames[0]);
       if (artist) {
         const matches = Matchmaker.getMatches(artist, AppData.artists, 3);
-        if (matches.length === 0) return { text: `I couldn't find strong collab matches for **${artist.name}** right now 🎯`, suggestions: ['Find artists', 'View events', 'Help'] };
-        let text = `🤝 Top matches for **${artist.name}** (${artist.genres.join(', ')} · ${artist.city}):\n\n`;
+        if (matches.length === 0) return { text: `I couldn't find strong collab matches for **${artist.name}** right now ${this._i('sparkles')}`, suggestions: ['Find artists', 'View events', 'Help'] };
+        let text = `${this._i('handshake')} Top matches for **${artist.name}** (${artist.genres.join(', ')} · ${artist.city}):\n\n`;
         matches.forEach((m, i) => {
-          text += `**${i + 1}. ${m.artist.name}** — ${'⭐'.repeat(Math.min(m.score, 5))}\n📍 ${m.artist.city} · ${m.artist.genres.join(', ')}\n✨ ${m.reasons.join(' · ')}\n[→ View Profile](#/artist/${m.artist.slug})\n\n`;
+          text += `**${i + 1}. ${m.artist.name}** — ${this._i('star').repeat(Math.min(m.score, 5))}\n${this._i('pin')} ${m.artist.city} · ${m.artist.genres.join(', ')}\n${this._i('sparkles')} ${m.reasons.join(' · ')}\n[→ View Profile](#/artist/${m.artist.slug})\n\n`;
         });
-        text += `💡 **${artist.name}'s interests:** _"${artist.collab_interests}"_`;
+        text += `${this._i('zap')} **${artist.name}'s interests:** _"${artist.collab_interests}"_`;
         return { text, suggestions: matches.map(m => `About ${m.artist.name}`).concat(['Find events']) };
       }
     }
-    let text = `I'd love to help with collab matching! 🤝\n\nTry asking about a specific artist:\n`;
+    let text = `I'd love to help with collab matching! ${this._i('handshake')}\n\nTry asking about a specific artist:\n`;
     text += AppData.artists.slice(0, 3).map(a => `• _"Who should ${a.name} collaborate with?"_`).join('\n');
     return { text, suggestions: AppData.artists.slice(0, 4).map(a => `Match for ${a.name.split(' ')[0]}`) };
   },
@@ -392,10 +411,10 @@ Always base your answers on the actual data above. If asked about artists or eve
     }
     const artist = AppData.artists.find(a => a.name === entities.artistNames[0]);
     if (!artist) return { text: `Couldn't find that artist. Try:\n` + AppData.artists.map(a => `• ${a.name}`).join('\n'), suggestions: AppData.artists.slice(0, 4).map(a => `About ${a.name.split(' ')[0]}`) };
-    const status = artist.availability ? '🟢 Open for collaboration' : '🔴 Currently busy';
+    const status = artist.availability ? '<span class="cb-dot cb-dot-green"></span> Open for collaboration' : '<span class="cb-dot cb-dot-red"></span> Currently busy';
     const events = (artist.upcoming_events || []).map(eid => AppData.events.find(e => e.id === eid)).filter(Boolean);
-    let text = `**${artist.name}**\n\n🎵 ${artist.genres.join(', ')} · 📍 ${artist.city}\n🛠️ ${artist.skills.join(', ')} · ${status}\n\n📝 _${artist.bio}_\n\n🏷️ ${artist.tags.join(' · ')}\n💡 _"${artist.collab_interests}"_\n\n🎶 **Tracks:** ${artist.sample_tracks.map(t => t.title).join(', ')}`;
-    if (events.length > 0) { text += `\n\n📅 **Upcoming:**\n` + events.map(e => `• ${e.title} — ${Utils.formatDate(e.date_time)}, ${e.city}`).join('\n'); }
+    let text = `**${artist.name}**\n\n${this._i('music')} ${artist.genres.join(', ')} · ${this._i('pin')} ${artist.city}\n${this._i('settings')} ${artist.skills.join(', ')} · ${status}\n\n${this._i('list')} _${artist.bio}_\n\n${this._i('tag')} ${artist.tags.join(' · ')}\n${this._i('zap')} _"${artist.collab_interests}"_\n\n${this._i('headphones')} **Tracks:** ${artist.sample_tracks.map(t => t.title).join(', ')}`;
+    if (events.length > 0) { text += `\n\n${this._i('cal')} **Upcoming:**\n` + events.map(e => `• ${e.title} — ${Utils.formatDate(e.date_time)}, ${e.city}`).join('\n'); }
     text += `\n\n[→ View Full Profile](#/artist/${artist.slug})`;
     return { text, suggestions: [`Collab match for ${artist.name.split(' ')[0]}`, 'Find similar artists', 'View events', 'Help'] };
   },
@@ -408,14 +427,14 @@ Always base your answers on the actual data above. If asked about artists or eve
       if (matchCount >= 2) { event = e; break; }
     }
     if (!event) return this.handleFindEvent(msg);
-    let text = `**${event.title}**\n\n🎵 ${event.genre} · 📍 ${event.venue_name}, ${event.venue_address}\n🗓️ ${Utils.formatDate(event.date_time)} at ${Utils.formatTime(event.date_time)}\n👥 ${event.rsvp_count} RSVPs · ${event.performer_slots} slots\n\n📝 _${event.description}_\n\n📋 ${event.instructions}\n📧 ${event.organizer_contact}`;
+    let text = `**${event.title}**\n\n${this._i('music')} ${event.genre} · ${this._i('pin')} ${event.venue_name}, ${event.venue_address}\n${this._i('cal')} ${Utils.formatDate(event.date_time)} at ${Utils.formatTime(event.date_time)}\n${this._i('users')} ${event.rsvp_count} RSVPs · ${event.performer_slots} slots\n\n${this._i('list')} _${event.description}_\n\n${this._i('list')} ${event.instructions}\n${this._i('mail')} ${event.organizer_contact}`;
     return { text, suggestions: ['Find artists for this event', 'All events', 'Browse artists'] };
   },
 
   handleUnknown(msg) {
     const responses = [
-      `Hmm, I'm not sure what you mean 🤔 Try asking me to find artists, events, or suggest collaborations!`,
-      `I didn't quite catch that! Try one of the suggestions below 👇`,
+      `Hmm, I'm not sure what you mean ${this._i('alert')} Try asking me to find artists, events, or suggest collaborations!`,
+      `I didn't quite catch that! Try one of the suggestions below ${this._i('sparkles')}`,
     ];
     return { text: responses[Math.floor(Math.random() * responses.length)], suggestions: ['Find artists', 'Upcoming events', 'Suggest a collab', 'Help'] };
   },
@@ -507,7 +526,7 @@ Always base your answers on the actual data above. If asked about artists or eve
           <div class="cypherbot-settings-section">
             <div class="cypherbot-settings-mode">
               <div class="cypherbot-mode-badge ${this.useAI ? 'ai' : 'local'}">
-                ${this.useAI ? '✨ Gemini AI Mode' : '🔧 Local Mode'}
+                ${this.useAI ? `${Icons.sparkles('cb-icon', 14)} Gemini AI Mode` : `${Icons.settings('cb-icon', 14)} Local Mode`}
               </div>
               <p class="cypherbot-mode-desc">${this.useAI
         ? 'CypherBot is powered by Google Gemini AI for natural conversations.'
@@ -559,7 +578,7 @@ Always base your answers on the actual data above. If asked about artists or eve
       this.saveApiKey(null);
       document.getElementById('cypherbot-api-key-input').value = '';
       overlay.remove();
-      this.addMessage('🔧 Switched back to **Local Mode**. I\'ll use built-in pattern matching. You can add an API key anytime from the settings ⚙️', 'bot', ['Find artists', 'Upcoming events', 'Help']);
+      this.addMessage(`${this._i('settings')} Switched back to **Local Mode**. I'll use built-in pattern matching. You can add an API key anytime from the ${this._i('settings')} settings.`, 'bot', ['Find artists', 'Upcoming events', 'Help']);
     });
   },
 
@@ -614,15 +633,15 @@ Always base your answers on the actual data above. If asked about artists or eve
       <div class="cypherbot-messages" id="cypherbot-messages">
         <div class="cypherbot-welcome">
           <div class="cypherbot-welcome-icon">${Icons.sparkles('', 40)}</div>
-          <h3>Hey! I'm CypherBot 🎤</h3>
+          <h3>Hey! I'm CypherBot ${Icons.mic('cb-icon', 18)}</h3>
           <p>Your AI guide to India's underground music scene. Ask me about artists, events, or collaborations!</p>
-          <div class="cypherbot-welcome-mode">${this.useAI ? '✨ Powered by Gemini AI' : '⚙️ Click the gear icon to connect Gemini AI'}</div>
+          <div class="cypherbot-welcome-mode">${this.useAI ? `${Icons.sparkles('cb-icon', 12)} Powered by Gemini AI` : `${Icons.settings('cb-icon', 12)} Click the gear icon to connect Gemini AI`}</div>
         </div>
         <div class="cypherbot-suggestions" id="cypherbot-welcome-suggestions">
-          <button class="cypherbot-chip" data-query="Find artists">🎤 Find Artists</button>
-          <button class="cypherbot-chip" data-query="Upcoming events">📅 Events</button>
-          <button class="cypherbot-chip" data-query="Suggest a collab">🤝 Collabs</button>
-          <button class="cypherbot-chip" data-query="help">❓ Help</button>
+          <button class="cypherbot-chip" data-query="Find artists">${Icons.mic('cb-icon', 12)} Find Artists</button>
+          <button class="cypherbot-chip" data-query="Upcoming events">${Icons.calendar('cb-icon', 12)} Events</button>
+          <button class="cypherbot-chip" data-query="Suggest a collab">${Icons.handshake('cb-icon', 12)} Collabs</button>
+          <button class="cypherbot-chip" data-query="help">${Icons.info('cb-icon', 12)} Help</button>
         </div>
       </div>
 
@@ -722,15 +741,15 @@ Always base your answers on the actual data above. If asked about artists or eve
         switch (aiResponse.error) {
           case 'invalid_key':
             this.saveApiKey(null);
-            this.addMessage('❌ **Invalid API key.** The key was removed. Go to ⚙️ settings to enter a valid Gemini API key.', 'bot', ['Help', 'Find artists']);
+            this.addMessage(`${this._i('close')} **Invalid API key.** The key was removed. Go to ${this._i('settings')} settings to enter a valid Gemini API key.`, 'bot', ['Help', 'Find artists']);
             return;
           case 'rate_limited':
             // Fallback to local NLP with friendly message
             const localResp = this.processMessage(msg);
-            this.addMessage(localResp.text + '\n\n_⏳ Gemini API rate limited — answered using local mode. Try again in a minute!_', 'bot', localResp.suggestions);
+            this.addMessage(localResp.text + `\n\n_${this._i('alert')} Gemini API rate limited — answered using local mode. Try again in a minute!_`, 'bot', localResp.suggestions);
             return;
           case 'forbidden':
-            this.addMessage('🔒 **API key doesn\'t have access.** Please check that your Gemini API key is valid and has the Generative Language API enabled in ⚙️ settings.', 'bot', ['Help', 'Find artists']);
+            this.addMessage(`${this._i('lock')} **API key doesn't have access.** Please check that your Gemini API key is valid and has the Generative Language API enabled in ${this._i('settings')} settings.`, 'bot', ['Help', 'Find artists']);
             return;
           case 'network':
             const fallback = this.processMessage(msg);
